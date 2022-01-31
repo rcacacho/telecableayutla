@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"                
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"    
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+
+    <ui:define name="pageTitle">
+        Consulta de Compras
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="frm_content">
+            <div align="center">
+                <ui:define name="pageTitle">
+                    <h1 style="margin: 0 0 0 0;">Consulta de Compras</h1>            
+                </ui:define>
+
+                <p:panelGrid columns="2"  styleClass="no-border" style="margin-top: 10px;">
+                    <p:outputLabel value="Fecha Inicio:"  styleClass="field-label" style="font-weight: bold;"  />
+                    <p:outputLabel value="Fecha Fin:"  styleClass="field-label" style="font-weight: bold;"  />
+
+                    <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{listaCompraMB.fechaInicio}" navigator="true">  
+                    </p:calendar>
+                    
+                    <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{listaCompraMB.fechaFin}" navigator="true">  
+                    </p:calendar>
+
+                    <p:outputLabel value=""   />
+                    <p:panelGrid columns="2" styleClass="no-border" style="margin-left: 160px;">
+                        <p:commandButton value="Buscar"  
+                                         action="#{listaCompraMB.buscarCliente()}" 
+                                         class="boton boton-imgtxt-16 b-gris4 icon-buscar"
+                                         style="background-size: 20px 20px !important; float: right;
+                                         background-position: 4px 1px !important;"   
+                                         id="btn_buscar"  
+                                         update="frm_content"
+                                         onstart="start();" oncomplete="stop();"/>
+                        <p:commandButton value="Limpiar" 
+                                         action="#{listaCompraMB.limpiarCampos()}"
+                                         class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                         style="background-size: 20px 20px !important; float: right;
+                                         background-position: 4px 1px !important;"
+                                         update="@form"
+                                         id="btn_limpiar"  onstart="start();" oncomplete="stop();"/>
+                    </p:panelGrid>
+                </p:panelGrid>
+
+                <br/>
+
+                <p:dataTable id="dt_queja" var="col" value="#{listaCompraMB.listCompra}"
+                             emptyMessage="No hay compras registradas" 
+                             styleClass="tabla-mp" style="width: 95%" rowIndexVar="rowId"
+                             rows="10" paginator="#{listaCompraMB.listCompra.size()>5}"  paginatorPosition="bottom">
+
+                    <p:column headerText="No." style="width: 5%;">
+                        #{rowId+1}
+                    </p:column>
+
+                    <p:column headerText="Tipo Compra" width="25%" >
+                        <p:outputLabel value="#{col.idtipocompra.tipo}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo Documento" width="25%" >
+                        <p:outputLabel value="#{col.idtipodocumentocompra.documento}"/>
+                    </p:column>
+
+                    <p:column headerText="Proveedor" width="25%" >
+                        <p:outputLabel value="#{col.idproveedor.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="No Documento" width="15%" >
+                        <p:outputLabel value="#{col.nodocumento}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha compra" width="22%" >
+                        <p:outputLabel value="#{col.fechacompra}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                    </p:column>
+                    
+                    <p:column headerText="Monto compra" width="22%" >
+                        <p:outputLabel value="#{col.montocompra}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                    </p:column>
+
+                    <p:column width="15%" exportable="false" >
+                        <h:commandLink action="#{listaCompraMB.detalle(col.idcompra)}" style="text-decoration: none;">
+                            <h:graphicImage library="images" name="consulta.png"   style="float: right !important;" width="20px;" title="Detalle"/>
+                        </h:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
