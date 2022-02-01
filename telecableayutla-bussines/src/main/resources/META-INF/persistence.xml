@@ -2,19 +2,21 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="TeleCablePU" transaction-type="JTA">
         <jta-data-source>jdbc/telecableayutla</jta-data-source>
-        <class>tele.costa.api.entity.Cliente</class>
-        <class>tele.costa.api.entity.Configuracionpago</class>
-        <class>tele.costa.api.entity.Departamento</class>
-        <class>tele.costa.api.entity.Municipio</class>
-        <class>tele.costa.api.entity.Pago</class>
-        <class>tele.costa.api.entity.Formapago</class>
-        <class>tele.costa.api.entity.Tipopago</class>
-        <class>tele.costa.api.entity.Detallepago</class>
-        <class>tele.costa.api.entity.Usuario</class>
-        <class>tele.costa.api.entity.Compra</class>
-        <class>tele.costa.api.entity.Tipocompra</class>
-        <class>tele.costa.api.entity.Tipodocumentocompra</class>
-        <class>tele.costa.api.entity.Proveedor</class>
+        <class>telecableayutla.api.entity.Cliente</class>
+        <class>telecableayutla.api.entity.Configuracionpago</class>
+        <class>telecableayutla.api.entity.Configuracionpago</class>
+        <class>telecableayutla.entity.Departamento</class>
+        <class>telecableayutla.api.entity.Municipio</class>
+        <class>telecableayutla.api.entity.Departamento</class>
+        <class>telecableayutla.api.entity.Pago</class>
+        <class>telecableayutla.api.entity.Formapago</class>
+        <class>telecableayutla.api.entity.Tipopago</class>
+        <class>telecableayutla.api.entity.Detallepago</class>
+        <class>telecableayutla.api.entity.Usuario</class>
+        <class>telecableayutla.api.entity.Compra</class>
+        <class>telecableayutla.api.entity.Tipocompra</class>
+        <class>telecableayutla.api.entity.Tipodocumentocompra</class>
+        <class>telecableayutla.api.entity.Proveedor</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>

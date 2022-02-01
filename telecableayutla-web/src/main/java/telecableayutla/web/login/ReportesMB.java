@@ -55,8 +55,7 @@ import telecableayutla.web.utils.SesionUsuarioMB;
  *
  * @author elfo_
  */
-@ManagedBean(name = "reporteMB")
-@ViewScoped
+
 public class ReportesMB implements Serializable {
 
     private static final Logger log = Logger.getLogger(ReportesMB.class);

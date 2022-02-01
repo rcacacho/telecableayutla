@@ -2,16 +2,12 @@ package telecableayutla.web.login;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import telecableayutla.web.utils.SesionUsuarioMB;
 
 /**
  *
  * @author rcacacho
  */
-@ManagedBean(name = "menuMB")
-@ViewScoped
 public class MenuMB implements Serializable {
 
     private boolean root;
