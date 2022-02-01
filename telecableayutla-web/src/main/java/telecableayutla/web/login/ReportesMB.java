@@ -15,8 +15,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
@@ -364,14 +362,11 @@ public class ReportesMB implements Serializable {
         celda3.setCellValue("SECTOR");
         celda3.setCellStyle(headerStyle);
         Cell celda4 = encabezados.createCell(headerNum++);
-        celda4.setCellValue("MUNICIPIO");
+        celda4.setCellValue("TELEFONO");
         celda4.setCellStyle(headerStyle);
         Cell celda5 = encabezados.createCell(headerNum++);
-        celda5.setCellValue("TELEFONO");
+        celda5.setCellValue("OBSERVACIÓN");
         celda5.setCellStyle(headerStyle);
-        Cell celda6 = encabezados.createCell(headerNum++);
-        celda6.setCellValue("OBSERVACIÓN");
-        celda6.setCellStyle(headerStyle);
         int correlativo = 1;
 
         for (Cliente reporte : listaCliente) {
@@ -391,38 +386,34 @@ public class ReportesMB implements Serializable {
                 cell2.setCellValue(reporte.getDireccion());
                 cell2.setCellStyle(cellStyle);
 
-                Cell cell3 = fila.getFila().createCell(fila.nextIndex().shortValue());
-                cell3.setCellValue(reporte.getSector());
-                cell3.setCellStyle(cellStyle);
+                if (reporte.getIdsector() != null) {
+                    Cell cell3 = fila.getFila().createCell(fila.nextIndex().shortValue());
+                    cell3.setCellValue(reporte.getIdsector().getSector());
+                    cell3.setCellStyle(cellStyle);
+                } else {
+                    Cell cell3 = fila.getFila().createCell(fila.nextIndex().shortValue());
+                    cell3.setCellValue("");
+                    cell3.setCellStyle(cellStyle);
+                }
 
-                if (reporte.getIdmunicipio() != null) {
+                if (reporte.getTelefono() != null) {
                     Cell cell4 = fila.getFila().createCell(fila.nextIndex().shortValue());
-                    cell4.setCellValue(reporte.getIdmunicipio().getMunicipio());
-                    cell4.setCellStyle(cellStyleNumero);
+                    cell4.setCellValue(reporte.getTelefono());
+                    cell4.setCellStyle(cellStyle);
                 } else {
                     Cell cell4 = fila.getFila().createCell(fila.nextIndex().shortValue());
                     cell4.setCellValue("");
                     cell4.setCellStyle(cellStyle);
                 }
 
-                if (reporte.getTelefono() != null) {
+                if (reporte.getObservacion() != null) {
                     Cell cell5 = fila.getFila().createCell(fila.nextIndex().shortValue());
-                    cell5.setCellValue(reporte.getTelefono());
+                    cell5.setCellValue(reporte.getObservacion());
                     cell5.setCellStyle(cellStyle);
                 } else {
                     Cell cell5 = fila.getFila().createCell(fila.nextIndex().shortValue());
                     cell5.setCellValue("");
                     cell5.setCellStyle(cellStyle);
-                }
-
-                if (reporte.getObservacion() != null) {
-                    Cell cell6 = fila.getFila().createCell(fila.nextIndex().shortValue());
-                    cell6.setCellValue(reporte.getObservacion());
-                    cell6.setCellStyle(cellStyle);
-                } else {
-                    Cell cell6 = fila.getFila().createCell(fila.nextIndex().shortValue());
-                    cell6.setCellValue("");
-                    cell6.setCellStyle(cellStyle);
                 }
             }
         }

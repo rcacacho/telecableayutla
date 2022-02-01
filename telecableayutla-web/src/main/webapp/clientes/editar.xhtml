@@ -67,7 +67,11 @@
                             <p:inputText value="#{editarClienteMB.cliente.nombres}" size="40" style="font-size: 16px!important;"/> 
                         </p:column>
                         <p:column  >
-                            <p:inputText value="#{editarClienteMB.cliente.sector}" size="50" style="font-size: 16px!important;"/>
+                            <p:selectOneMenu id="mun" value="#{editarClienteMB.cliente.idsector}" style="width: 50%" 
+                                             converter="entityConverter" filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="(selecciona un municipio)" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{editarClienteMB.listMunicipios}"  var="mun" itemLabel="#{mun.municipio}" itemValue="#{mun}"/>
+                            </p:selectOneMenu>
                         </p:column>   
                     </p:row>
                     <p:row>
@@ -84,11 +88,7 @@
                         </p:column>   
 
                         <p:column>
-                            <p:selectOneMenu id="mun" value="#{editarClienteMB.cliente.idmunicipio}" style="width: 50%" 
-                                             converter="entityConverter" filter="true" filterMatchMode="contains">
-                                <f:selectItem itemLabel="(selecciona un municipio)" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{editarClienteMB.listMunicipios}"  var="mun" itemLabel="#{mun.municipio}" itemValue="#{mun}"/>
-                            </p:selectOneMenu>
+
                         </p:column>   
                     </p:row>
                     <p:row>

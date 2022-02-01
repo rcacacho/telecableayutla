@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByNit", query = "SELECT c FROM Cliente c WHERE c.nit = :nit"),
     @NamedQuery(name = "Cliente.findByNombres", query = "SELECT c FROM Cliente c WHERE c.nombres = :nombres"),
     @NamedQuery(name = "Cliente.findByDireccion", query = "SELECT c FROM Cliente c WHERE c.direccion = :direccion"),
-    @NamedQuery(name = "Cliente.findBySector", query = "SELECT c FROM Cliente c WHERE c.sector = :sector"),
     @NamedQuery(name = "Cliente.findByObservacion", query = "SELECT c FROM Cliente c WHERE c.observacion = :observacion"),
     @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
     @NamedQuery(name = "Cliente.findByFechainicioservicio", query = "SELECT c FROM Cliente c WHERE c.fechainicioservicio = :fechainicioservicio"),
@@ -56,88 +55,80 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "idcliente")
     private Integer idcliente;
-    
+
     @Size(max = 250)
     @Column(name = "codigo")
     private String codigo;
-    
+
     @Size(max = 20)
     @Column(name = "cui")
     private String cui;
-    
+
     @Size(max = 50)
     @Column(name = "nit")
     private String nit;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
     @Column(name = "nombres")
     private String nombres;
-    
+
     @Size(max = 2000)
     @Column(name = "direccion")
     private String direccion;
-    
-    @Size(max = 400)
-    @Column(name = "sector")
-    private String sector;
-    
+
     @Size(max = 500)
     @Column(name = "observacion")
     private String observacion;
-    
+
     @Size(max = 100)
     @Column(name = "telefono")
     private String telefono;
-    
+
     @Size(max = 100)
     @Column(name = "fechainicioservicio")
     private String fechainicioservicio;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "usuariocreacion")
     private String usuariocreacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "fechacreacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Size(max = 50)
     @Column(name = "usuariomodificacion")
     private String usuariomodificacion;
-    
+
     @Column(name = "fechamodificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechamodificacion;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "activo")
     private boolean activo;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
     private List<Pago> pagoList;
-    
+
     @JoinColumn(name = "idconfiguracionpago", referencedColumnName = "idconfiguracionpago")
     @ManyToOne(fetch = FetchType.LAZY)
     private Configuracionpago idconfiguracionpago;
-    
+
     @JoinColumn(name = "idsector", referencedColumnName = "idsector")
     @ManyToOne(fetch = FetchType.LAZY)
     private Sector idsector;
-    
-    @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Municipio idmunicipio;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
     private List<Cobro> cobroList;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
     private List<Atencion> atencionList;
 
@@ -202,14 +193,6 @@ public class Cliente implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
     }
 
     public String getObservacion() {
@@ -301,14 +284,6 @@ public class Cliente implements Serializable {
         this.idsector = idsector;
     }
 
-    public Municipio getIdmunicipio() {
-        return idmunicipio;
-    }
-
-    public void setIdmunicipio(Municipio idmunicipio) {
-        this.idmunicipio = idmunicipio;
-    }
-
     @XmlTransient
     public List<Cobro> getCobroList() {
         return cobroList;
@@ -351,5 +326,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "telecableayutla.api.entity.Cliente[ idcliente=" + idcliente + " ]";
     }
-    
+
 }
