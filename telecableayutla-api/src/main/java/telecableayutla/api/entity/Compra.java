@@ -6,6 +6,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,8 +46,8 @@ public class Compra implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idcompra")
     private Integer idcompra;
     
@@ -74,7 +76,7 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "montocompra")
-    private Integer montocompra;
+    private double montocompra;
     
     @Size(max = 2000)
     @Column(name = "descripcion")
@@ -124,7 +126,7 @@ public class Compra implements Serializable {
         this.idcompra = idcompra;
     }
 
-    public Compra(Integer idcompra, Date fechacompra, int montocompra, Date fechacreacion, String usuariocreacion, boolean activo) {
+    public Compra(Integer idcompra, Date fechacompra, double montocompra, Date fechacreacion, String usuariocreacion, boolean activo) {
         this.idcompra = idcompra;
         this.fechacompra = fechacompra;
         this.montocompra = montocompra;
@@ -181,11 +183,11 @@ public class Compra implements Serializable {
         this.nodocumento = nodocumento;
     }
 
-    public int getMontocompra() {
+    public double getMontocompra() {
         return montocompra;
     }
 
-    public void setMontocompra(int montocompra) {
+    public void setMontocompra(double montocompra) {
         this.montocompra = montocompra;
     }
 

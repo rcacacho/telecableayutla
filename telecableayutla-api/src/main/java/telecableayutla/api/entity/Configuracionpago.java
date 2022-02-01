@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,8 +43,8 @@ public class Configuracionpago implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idconfiguracionpago")
     private Integer idconfiguracionpago;
     
@@ -53,6 +56,7 @@ public class Configuracionpago implements Serializable {
     @Size(max = 1000)
     @Column(name = "descripcion")
     private String descripcion;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -80,6 +84,9 @@ public class Configuracionpago implements Serializable {
     
     @OneToMany(mappedBy = "idconfiguracionpago", fetch = FetchType.LAZY)
     private List<Cliente> clienteList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idconfiguracionpago", fetch = FetchType.LAZY)
+    private List<Cobro> cobroList;
 
     public Configuracionpago() {
     }
@@ -104,11 +111,11 @@ public class Configuracionpago implements Serializable {
         this.idconfiguracionpago = idconfiguracionpago;
     }
 
-    public int getValor() {
+    public Integer getValor() {
         return valor;
     }
 
-    public void setValor(int valor) {
+    public void setValor(Integer valor) {
         this.valor = valor;
     }
 
@@ -167,6 +174,15 @@ public class Configuracionpago implements Serializable {
 
     public void setClienteList(List<Cliente> clienteList) {
         this.clienteList = clienteList;
+    }
+
+    @XmlTransient
+    public List<Cobro> getCobroList() {
+        return cobroList;
+    }
+
+    public void setCobroList(List<Cobro> cobroList) {
+        this.cobroList = cobroList;
     }
 
     @Override

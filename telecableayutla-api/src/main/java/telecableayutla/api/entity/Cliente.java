@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -50,8 +52,8 @@ public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idcliente")
     private Integer idcliente;
     
@@ -72,6 +74,7 @@ public class Cliente implements Serializable {
     @Size(min = 1, max = 1000)
     @Column(name = "nombres")
     private String nombres;
+    
     @Size(max = 2000)
     @Column(name = "direccion")
     private String direccion;
@@ -124,9 +127,19 @@ public class Cliente implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Configuracionpago idconfiguracionpago;
     
+    @JoinColumn(name = "idsector", referencedColumnName = "idsector")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Sector idsector;
+    
     @JoinColumn(name = "idmunicipio", referencedColumnName = "idmunicipio")
     @ManyToOne(fetch = FetchType.LAZY)
     private Municipio idmunicipio;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
+    private List<Cobro> cobroList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
+    private List<Atencion> atencionList;
 
     public Cliente() {
     }
@@ -280,12 +293,38 @@ public class Cliente implements Serializable {
         this.idconfiguracionpago = idconfiguracionpago;
     }
 
+    public Sector getIdsector() {
+        return idsector;
+    }
+
+    public void setIdsector(Sector idsector) {
+        this.idsector = idsector;
+    }
+
     public Municipio getIdmunicipio() {
         return idmunicipio;
     }
 
     public void setIdmunicipio(Municipio idmunicipio) {
         this.idmunicipio = idmunicipio;
+    }
+
+    @XmlTransient
+    public List<Cobro> getCobroList() {
+        return cobroList;
+    }
+
+    public void setCobroList(List<Cobro> cobroList) {
+        this.cobroList = cobroList;
+    }
+
+    @XmlTransient
+    public List<Atencion> getAtencionList() {
+        return atencionList;
+    }
+
+    public void setAtencionList(List<Atencion> atencionList) {
+        this.atencionList = atencionList;
     }
 
     @Override

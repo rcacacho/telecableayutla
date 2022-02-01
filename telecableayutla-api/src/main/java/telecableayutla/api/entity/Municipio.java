@@ -3,9 +3,12 @@ package telecableayutla.api.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,8 +37,8 @@ public class Municipio implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idmunicipio")
     private Integer idmunicipio;
     
@@ -56,6 +59,9 @@ public class Municipio implements Serializable {
     
     @OneToMany(mappedBy = "idmunicipio", fetch = FetchType.LAZY)
     private List<Cliente> clienteList;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmunicipio", fetch = FetchType.LAZY)
+    private List<Sector> sectorList;
 
     public Municipio() {
     }
@@ -109,6 +115,15 @@ public class Municipio implements Serializable {
 
     public void setClienteList(List<Cliente> clienteList) {
         this.clienteList = clienteList;
+    }
+
+    @XmlTransient
+    public List<Sector> getSectorList() {
+        return sectorList;
+    }
+
+    public void setSectorList(List<Sector> sectorList) {
+        this.sectorList = sectorList;
     }
 
     @Override

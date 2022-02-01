@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -35,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pago.findByAnio", query = "SELECT p FROM Pago p WHERE p.anio = :anio"),
     @NamedQuery(name = "Pago.findByMes", query = "SELECT p FROM Pago p WHERE p.mes = :mes"),
     @NamedQuery(name = "Pago.findByTotal", query = "SELECT p FROM Pago p WHERE p.total = :total"),
+    @NamedQuery(name = "Pago.findByObservacion", query = "SELECT p FROM Pago p WHERE p.observacion = :observacion"),
     @NamedQuery(name = "Pago.findByFechapago", query = "SELECT p FROM Pago p WHERE p.fechapago = :fechapago"),
     @NamedQuery(name = "Pago.findByUsuariocreacion", query = "SELECT p FROM Pago p WHERE p.usuariocreacion = :usuariocreacion"),
     @NamedQuery(name = "Pago.findByFechacreacion", query = "SELECT p FROM Pago p WHERE p.fechacreacion = :fechacreacion"),
@@ -45,8 +48,8 @@ public class Pago implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idpago")
     private Integer idpago;
     
@@ -63,6 +66,10 @@ public class Pago implements Serializable {
     
     @Column(name = "total")
     private Integer total;
+    
+    @Size(max = 2000)
+    @Column(name = "observacion")
+    private String observacion;
     
     @Column(name = "fechapago")
     @Temporal(TemporalType.TIMESTAMP)
@@ -128,11 +135,11 @@ public class Pago implements Serializable {
         this.idpago = idpago;
     }
 
-    public int getAnio() {
+    public Integer getAnio() {
         return anio;
     }
 
-    public void setAnio(int anio) {
+    public void setAnio(Integer anio) {
         this.anio = anio;
     }
 
@@ -150,6 +157,14 @@ public class Pago implements Serializable {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public Date getFechapago() {

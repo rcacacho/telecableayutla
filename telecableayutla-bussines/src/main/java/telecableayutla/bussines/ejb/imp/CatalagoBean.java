@@ -13,6 +13,7 @@ import telecableayutla.api.entity.Departamento;
 import telecableayutla.api.entity.Formapago;
 import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Proveedor;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.api.entity.Tipocompra;
 import telecableayutla.api.entity.Tipodocumentocompra;
 import telecableayutla.api.entity.Tipopago;
@@ -138,7 +139,7 @@ public class CatalagoBean implements CatalogoBeanLocal {
 
     @Override
     public List<Formapago> listFormaPago() {
-       List<Formapago> lst = em.createQuery("SELECT qj FROM Formapago qj where qj.activo = true ", Formapago.class)
+        List<Formapago> lst = em.createQuery("SELECT qj FROM Formapago qj where qj.activo = true ", Formapago.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -150,7 +151,7 @@ public class CatalagoBean implements CatalogoBeanLocal {
 
     @Override
     public List<Usuario> listaUsuarios() {
-           List<Usuario> lst = em.createQuery("SELECT qj FROM Usuario qj where qj.activo = true", Usuario.class)
+        List<Usuario> lst = em.createQuery("SELECT qj FROM Usuario qj where qj.activo = true", Usuario.class)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {
@@ -160,5 +161,15 @@ public class CatalagoBean implements CatalogoBeanLocal {
         return lst;
     }
 
-}
+    @Override
+    public List<Sector> listSector() {
+        List<Sector> lst = em.createQuery("SELECT qj FROM Sector qj where qj.activo = true", Sector.class)
+                .getResultList();
 
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
+    }
+}

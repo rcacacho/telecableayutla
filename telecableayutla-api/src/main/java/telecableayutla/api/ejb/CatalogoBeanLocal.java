@@ -7,6 +7,7 @@ import telecableayutla.api.entity.Departamento;
 import telecableayutla.api.entity.Formapago;
 import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Proveedor;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.api.entity.Tipocompra;
 import telecableayutla.api.entity.Tipodocumentocompra;
 import telecableayutla.api.entity.Tipopago;
@@ -38,5 +39,7 @@ public interface CatalogoBeanLocal {
     List<Formapago> listFormaPago();
 
     List<Usuario> listaUsuarios();
+    
+    List<Sector> listSector();
 
 }

@@ -310,7 +310,7 @@ public class ReportesMB implements Serializable {
             cell13.setCellStyle(cellStyle);
 
             Cell cell11 = fila.getFila().createCell(fila.nextIndex().shortValue());
-            cell11.setCellValue("TELECOSTA");
+            cell11.setCellValue("TELECABLE AYUTLA");
             CellUtil.setAlignment(cell11, workbook, CellStyle.ALIGN_LEFT);
             cell11.setCellStyle(cellStyleTitulo);
         }
