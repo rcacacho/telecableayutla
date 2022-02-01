@@ -60,7 +60,7 @@ public class ReportesMB implements Serializable {
 
     private static final Logger log = Logger.getLogger(ReportesMB.class);
 
-    @Resource(lookup = "jdbc/telecosta")
+    @Resource(lookup = "jdbc/telecableayutla")
     private DataSource dataSource;
 
     @EJB
