@@ -51,12 +51,12 @@
                         </p:row>
                         <p:row>
                             <p:column>
-                                <p:selectOneMenu id="reg" value="#{registroCobroMasivoMB.municipioSelected}" style="width: 250px;" 
+                                <p:selectOneMenu id="reg" value="#{registroCobroMasivoMB.sectorSelected}" style="width: 250px;" 
                                                  converter="entityConverter" filter="true" filterMatchMode="contains"
-                                                 required="true" requiredMessage="Debes seleccionar un municipio" >
-                                    <p:ajax  listener="#{registroCobroMasivoMB.cargarClientesMunicipios()}" update="cl" />
+                                                 required="true" requiredMessage="Debes seleccionar un sector" >
+                                    <p:ajax  listener="#{registroCobroMasivoMB.cargarClientesSector()}" update="cl" />
                                     <f:selectItem itemLabel="(selecciona un municipio)" itemValue="" noSelectionOption="true" />
-                                    <f:selectItems value="#{registroCobroMasivoMB.listMunicipios}"  var="reg" itemLabel="#{reg.municipio}" itemValue="#{reg}"/>
+                                    <f:selectItems value="#{registroCobroMasivoMB.listSector}"  var="reg" itemLabel="#{reg.sector}" itemValue="#{reg}"/>
                                 </p:selectOneMenu>
                             </p:column>
                             <p:column  >

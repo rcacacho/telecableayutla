@@ -13,8 +13,8 @@ import telecableayutla.api.ejb.ClienteBeanLocal;
 import telecableayutla.api.ejb.PagosBeanLocal;
 import telecableayutla.api.entity.Cliente;
 import telecableayutla.api.entity.Detallepago;
-import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Pago;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.api.enums.TipoPagoEnum;
 import telecableayutla.web.utils.JsfUtil;
 import telecableayutla.web.utils.SesionUsuarioMB;
@@ -37,8 +37,8 @@ public class RegistroCobroMB implements Serializable {
     private CatalogoBeanLocal catalogoBean;
 
     private Pago pago;
-    private Municipio municipioSelected;
-    private List<Municipio> listMunicipios;
+    private Sector sectorSelected;
+    private List<Sector> listSector;
     private Cliente cliente;
     private List<Cliente> listClientes;
 
@@ -48,16 +48,16 @@ public class RegistroCobroMB implements Serializable {
 
     @PostConstruct
     void cargarDatos() {
-        listMunicipios = catalogoBean.listMunicipioByIdDepartamento(1);
+        listSector = catalogoBean.listSector();
     }
 
     public void regresar() {
         JsfUtil.redirectTo("/cobros/lista.xhtml");
     }
 
-    public void cargarClientesMunicipios() {
-        if (municipioSelected != null) {
-            listClientes = clienteBean.ListClientesByIdMunucipio(municipioSelected.getIdmunicipio());
+    public void cargarClientesSector() {
+        if (sectorSelected != null) {
+            listClientes = clienteBean.ListClientesByIdSector(sectorSelected.getIdsector());
         } else {
             listClientes = null;
             cliente = null;
@@ -80,7 +80,7 @@ public class RegistroCobroMB implements Serializable {
 
         if (pago.getTotal() != null) {
             pago.setTotal(cliente.getIdconfiguracionpago().getValor() - pago.getTotal());
-        }else{
+        } else {
             pago.setTotal(cliente.getIdconfiguracionpago().getValor());
         }
 
@@ -96,7 +96,7 @@ public class RegistroCobroMB implements Serializable {
 
             if (detalle.getMontopagado() != null) {
                 detalle.setTotal(detalle.getMontocobrado() - detalle.getMontopagado());
-            }else{
+            } else {
                 detalle.setTotal(detalle.getMontocobrado());
             }
 
@@ -119,22 +119,6 @@ public class RegistroCobroMB implements Serializable {
         this.pago = pago;
     }
 
-    public Municipio getMunicipioSelected() {
-        return municipioSelected;
-    }
-
-    public void setMunicipioSelected(Municipio municipioSelected) {
-        this.municipioSelected = municipioSelected;
-    }
-
-    public List<Municipio> getListMunicipios() {
-        return listMunicipios;
-    }
-
-    public void setListMunicipios(List<Municipio> listMunicipios) {
-        this.listMunicipios = listMunicipios;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -151,5 +135,20 @@ public class RegistroCobroMB implements Serializable {
         this.listClientes = listClientes;
     }
 
-}
+    public Sector getSectorSelected() {
+        return sectorSelected;
+    }
 
+    public void setSectorSelected(Sector sectorSelected) {
+        this.sectorSelected = sectorSelected;
+    }
+
+    public List<Sector> getListSector() {
+        return listSector;
+    }
+
+    public void setListSector(List<Sector> listSector) {
+        this.listSector = listSector;
+    }
+
+}

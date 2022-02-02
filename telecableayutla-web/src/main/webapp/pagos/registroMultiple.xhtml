@@ -53,7 +53,7 @@
                             <p:column>
                                 <p:selectOneMenu id="reg" value="#{registroMultiPagoMB.sectorSelected}" style="width: 250px;" 
                                                  converter="entityConverter" filter="true" filterMatchMode="contains"
-                                                 required="true" requiredMessage="Debes seleccionar un municipio" >
+                                                 required="true" requiredMessage="Debes seleccionar un sector" >
                                     <p:ajax  listener="#{registroMultiPagoMB.cargarClientesSector()}" update="cl" />
                                     <f:selectItem itemLabel="(selecciona un municipio)" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{registroMultiPagoMB.listSector}"  var="reg" itemLabel="#{reg.sector}" itemValue="#{reg}"/>
