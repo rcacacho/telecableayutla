@@ -20,11 +20,11 @@ import telecableayutla.api.entity.Detallepago;
 import telecableayutla.api.entity.Formapago;
 import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Pago;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.api.entity.Tipopago;
 import telecableayutla.api.enums.TipoPagoEnum;
 import telecableayutla.web.utils.JsfUtil;
 import telecableayutla.web.utils.SesionUsuarioMB;
-
 
 /**
  *
@@ -49,8 +49,8 @@ public class RegistroMultiPagoMB implements Serializable {
     private Tipopago tipoPago;
     private List<Formapago> listFormaPago;
     private List<Cliente> listClientes;
-    private Municipio municipioSelected;
-    private List<Municipio> listMunicipios;
+    private Sector sectorSelected;
+    private List<Sector> listSector;
     private Date fechaInicio;
     private Date fechaFin;
 
@@ -62,7 +62,7 @@ public class RegistroMultiPagoMB implements Serializable {
     @PostConstruct
     void cargarDatos() {
         listFormaPago = catalogoBean.listFormaPago();
-        listMunicipios = catalogoBean.listMunicipioByIdDepartamento(1);
+        listSector = catalogoBean.listSector();
     }
 
     public List<Cliente> completeCliente(String query) {
@@ -227,9 +227,9 @@ public class RegistroMultiPagoMB implements Serializable {
         pago.setIdcliente(cliente);
     }
 
-    public void cargarClientesMunicipios() {
-        if (municipioSelected != null) {
-            listClientes = clienteBean.ListClientesByIdMunucipio(municipioSelected.getIdmunicipio());
+    public void cargarClientesSector() {
+        if (sectorSelected != null) {
+            listClientes = clienteBean.ListClientesByIdSector(sectorSelected.getIdsector());
         } else {
             listClientes = null;
             cliente = null;
@@ -344,28 +344,12 @@ public class RegistroMultiPagoMB implements Serializable {
         this.listClientes = listClientes;
     }
 
-    public List<Municipio> getListMunicipios() {
-        return listMunicipios;
-    }
-
-    public void setListMunicipios(List<Municipio> listMunicipios) {
-        this.listMunicipios = listMunicipios;
-    }
-
     public Tipopago getTipoPago() {
         return tipoPago;
     }
 
     public void setTipoPago(Tipopago tipoPago) {
         this.tipoPago = tipoPago;
-    }
-
-    public Municipio getMunicipioSelected() {
-        return municipioSelected;
-    }
-
-    public void setMunicipioSelected(Municipio municipioSelected) {
-        this.municipioSelected = municipioSelected;
     }
 
     public Detallepago getDetalle() {
@@ -390,6 +374,22 @@ public class RegistroMultiPagoMB implements Serializable {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public Sector getSectorSelected() {
+        return sectorSelected;
+    }
+
+    public void setSectorSelected(Sector sectorSelected) {
+        this.sectorSelected = sectorSelected;
+    }
+
+    public List<Sector> getListSector() {
+        return listSector;
+    }
+
+    public void setListSector(List<Sector> listSector) {
+        this.listSector = listSector;
     }
 
 }

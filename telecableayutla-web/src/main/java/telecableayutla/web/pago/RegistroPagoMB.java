@@ -16,7 +16,6 @@ import telecableayutla.api.ejb.PagosBeanLocal;
 import telecableayutla.api.entity.Cliente;
 import telecableayutla.api.entity.Detallepago;
 import telecableayutla.api.entity.Formapago;
-import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Pago;
 import telecableayutla.api.entity.Sector;
 import telecableayutla.api.entity.Tipopago;
@@ -112,7 +111,7 @@ public class RegistroPagoMB implements Serializable {
                 pago = null;
                 cliente = null;
                 detalle = null;
-                municipioSelected = null;
+                sectorSelected = null;
                 return;
             }
         }
@@ -144,8 +143,8 @@ public class RegistroPagoMB implements Serializable {
     }
 
     public void cargarClientesSector() {
-        if (municipioSelected != null) {
-            listClientes = clienteBean.ListClientesByIdMunucipio(municipioSelected.getIdmunicipio());
+        if (sectorSelected != null) {
+            listClientes = clienteBean.ListClientesByIdSector(sectorSelected.getIdsector());
         } else {
             listClientes = null;
             cliente = null;
@@ -185,28 +184,12 @@ public class RegistroPagoMB implements Serializable {
         this.listClientes = listClientes;
     }
 
-    public List<Municipio> getListMunicipios() {
-        return listMunicipios;
-    }
-
-    public void setListMunicipios(List<Municipio> listMunicipios) {
-        this.listMunicipios = listMunicipios;
-    }
-
     public Tipopago getTipoPago() {
         return tipoPago;
     }
 
     public void setTipoPago(Tipopago tipoPago) {
         this.tipoPago = tipoPago;
-    }
-
-    public Municipio getMunicipioSelected() {
-        return municipioSelected;
-    }
-
-    public void setMunicipioSelected(Municipio municipioSelected) {
-        this.municipioSelected = municipioSelected;
     }
 
     public Detallepago getDetalle() {
@@ -223,6 +206,14 @@ public class RegistroPagoMB implements Serializable {
 
     public void setListSector(List<Sector> listSector) {
         this.listSector = listSector;
+    }
+
+    public Sector getSectorSelected() {
+        return sectorSelected;
+    }
+
+    public void setSectorSelected(Sector sectorSelected) {
+        this.sectorSelected = sectorSelected;
     }
 
 }
