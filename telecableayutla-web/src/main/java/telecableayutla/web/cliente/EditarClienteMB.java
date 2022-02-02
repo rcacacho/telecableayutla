@@ -14,9 +14,9 @@ import telecableayutla.api.ejb.ClienteBeanLocal;
 import telecableayutla.api.entity.Cliente;
 import telecableayutla.api.entity.Configuracionpago;
 import telecableayutla.api.entity.Municipio;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.web.utils.JsfUtil;
 import telecableayutla.web.utils.SesionUsuarioMB;
-
 
 /**
  *
@@ -37,11 +37,13 @@ public class EditarClienteMB implements Serializable {
     private Cliente cliente;
     private List<Municipio> listMunicipios;
     private List<Configuracionpago> listConfiguracionPago;
+    private List<Sector> listSector;
 
     public void cargarDatos() {
         cliente = clienteBean.findClienteById(idcliente);
         listMunicipios = catalogoBean.listMunicipioByIdDepartamento(1);
         listConfiguracionPago = catalogoBean.ListConfiguracionPago();
+        listSector = catalogoBean.listSector();
     }
 
     public void actualizarCliente() throws IOException {
@@ -95,6 +97,14 @@ public class EditarClienteMB implements Serializable {
 
     public void setListConfiguracionPago(List<Configuracionpago> listConfiguracionPago) {
         this.listConfiguracionPago = listConfiguracionPago;
+    }
+
+    public List<Sector> getListSector() {
+        return listSector;
+    }
+
+    public void setListSector(List<Sector> listSector) {
+        this.listSector = listSector;
     }
 
 }

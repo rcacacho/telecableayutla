@@ -18,6 +18,7 @@ import telecableayutla.api.entity.Detallepago;
 import telecableayutla.api.entity.Formapago;
 import telecableayutla.api.entity.Municipio;
 import telecableayutla.api.entity.Pago;
+import telecableayutla.api.entity.Sector;
 import telecableayutla.api.entity.Tipopago;
 import telecableayutla.api.enums.TipoPagoEnum;
 import telecableayutla.web.utils.JsfUtil;
@@ -46,8 +47,8 @@ public class RegistroPagoMB implements Serializable {
     private Tipopago tipoPago;
     private List<Formapago> listFormaPago;
     private List<Cliente> listClientes;
-    private Municipio municipioSelected;
-    private List<Municipio> listMunicipios;
+    private Sector sectorSelected;
+    private List<Sector> listSector;
 
     public RegistroPagoMB() {
         pago = new Pago();
@@ -57,7 +58,7 @@ public class RegistroPagoMB implements Serializable {
     @PostConstruct
     void cargarDatos() {
         listFormaPago = catalogoBean.listFormaPago();
-        listMunicipios = catalogoBean.listMunicipioByIdDepartamento(1);
+        listSector = catalogoBean.listSector();
     }
 
     public List<Cliente> completeCliente(String query) {
@@ -92,7 +93,7 @@ public class RegistroPagoMB implements Serializable {
             pago = null;
             cliente = null;
             detalle = null;
-            municipioSelected = null;
+            sectorSelected = null;
             return;
         } else {
             pago.setUsuariocreacion(SesionUsuarioMB.getUserName());
@@ -142,7 +143,7 @@ public class RegistroPagoMB implements Serializable {
         pago.setIdcliente(cliente);
     }
 
-    public void cargarClientesMunicipios() {
+    public void cargarClientesSector() {
         if (municipioSelected != null) {
             listClientes = clienteBean.ListClientesByIdMunucipio(municipioSelected.getIdmunicipio());
         } else {
@@ -214,6 +215,14 @@ public class RegistroPagoMB implements Serializable {
 
     public void setDetalle(Detallepago detalle) {
         this.detalle = detalle;
+    }
+
+    public List<Sector> getListSector() {
+        return listSector;
+    }
+
+    public void setListSector(List<Sector> listSector) {
+        this.listSector = listSector;
     }
 
 }
