@@ -37,7 +37,7 @@
                                          converter="entityConverter" filter="true" filterMatchMode="contains"
                                          required="true" requiredMessage="Debes selecciona un municipio" >
                             <f:selectItem itemLabel="(selecciona un municipio)" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{registroClienteMB.listMunicipios}"  var="mun" itemLabel="#{mun.municipio}" itemValue="#{mun}"/>
+                            <f:selectItems value="#{registroClienteMB.listMunicipios}"  var="mun" itemLabel="#{mun.municipio}" itemValue="#{mun.idmunicipio}"/>
                         </p:selectOneMenu>
 
                         <p:selectOneMenu id="adm" value="#{registroUsuarioMB.usuario.root}" style="width: 50%" 
